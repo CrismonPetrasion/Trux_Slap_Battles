@@ -1,0 +1,202 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Slap Battles | Trux Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "SlapBattles", IntroEnabled = false})
+
+if game.PlaceId == 9431156611 then
+   local Bypass;
+   Bypass = hookmetamethod(game, "__namecall", function(Method, ...) 
+         if getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.Ban then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.AdminGUI then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.WS then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.WS2 then
+            return
+         end
+         return Bypass(Method, ...)
+   end)
+end   
+
+if game.PlaceId == 11520107397 or game.PlaceId == 6403373529 or game.PlaceId == 9015014224 then
+   local Bypass;
+   Bypass = hookmetamethod(game, "__namecall", function(Method, ...) 
+         if getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Ban then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.AdminGUI then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.WalkSpeedChanged then
+            return
+         end
+         return Bypass(Method, ...)
+   end)
+end
+
+function Notify(Title, Content, Image, Time)
+   OrionLib:MakeNotification({
+      Name = Title or "Error",
+      Content = Content or "Error",
+      Image = Image or "rbxassetid://4483345998",
+      Time = Time or 1
+   })
+end
+
+local Home = Window:MakeTab({
+   Name = "Home",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+local Combat = Window:MakeTab({
+   Name = "Combat",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+local Misc = Window:MakeTab({
+   Name = "Misc",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+local Badges = Window:MakeTab({
+   Name = "Badges",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+local Player = Window:MakeTab({
+   Name = "Player",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+--// Home Buttons
+
+local IY = Home:AddButton({
+   Name = "Infinite Yield",
+   Callback = function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Infinite%20Yield%20but%20with%20secure%20dex'))()
+   end
+})
+
+local RS = Home:AddButton({
+   Name = "Rejoin Server",
+   Callback = function()
+      game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+   end
+})
+
+local DU = Home:AddButton({
+   Name = "Destroy UI",
+   Callback = function()
+      OrionLib:Destroy()
+   end
+})
+
+--// Combat Buttons
+
+--// Misc Buttons
+
+local VTS = Misc:AddButton({
+   Name = "View Testing Server",
+   Callback = function()
+      local TeleportFunction = QueueonTeleport or Queue_On_Teleport
+      if TeleportFunction then
+         TeleportFunction([[
+            if not game:IsLoaded then
+               game.Loaded:Wait()
+            end
+            repeat
+               task.wait(1)
+            until game.Players.LocalPlayer
+            game:GetService("RunService").RenderStepped:Connect(function()
+               game:GetService("GuiService"):ClearError()
+               game.CoreGui:WaitForChild("RobloxLoadingGUI"):Destroy()
+            end)
+
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/CrismonPetrasion/Trux_Slap_Battles/main/Trux_Testing_Server")))()
+         ]])
+      end
+      game:GetService("TeleportService"):Teleport(9020359053)
+   end
+})
+
+local VSRTS = Misc:AddButton({
+   Name = "View Slap Royale Testing Server",
+   Callback = function()
+      local TeleportFunction = QueueonTeleport or Queue_On_Teleport
+      if TeleportFunction then
+         TeleportFunction([[
+            if not game:IsLoaded then
+               game.Loaded:Wait()
+            end
+            repeat
+               task.wait(1)
+            until game.Players.LocalPlayer
+            game:GetService("RunService").RenderStepped:Connect(function()
+               game:GetService("GuiService"):ClearError()
+               game.CoreGui:WaitForChild("RobloxLoadingGUI"):Destroy()
+            end)
+
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/CrismonPetrasion/Trux_Slap_Battles/main/Trux_Testing_Server")))()
+         ]])
+      end
+      game:GetService("TeleportService"):Teleport(9412268818)
+   end
+})
+
+--// Badges Buttons
+
+local GBB = Badges:AddButton({
+   Name = "Get Brazil Badge",
+   Callback = function()
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.workspace.Lobby.brazil.portal.CFrame
+   end
+})
+
+local GLOB = Badges:AddButton({
+   Name = "Get Lone Orange Badge",
+   Callback = function()
+      fireclickdetector(game.Workspace.Arena.island5.Orange.ClickDetector)
+   end
+})
+
+local GCEB = Badges:AddButton({
+   Name = "Get Court Evidence Badge",
+   Callback = function()
+      fireclickdetector(game.Workspace.Lobby.Scene.knofe.ClickDetector)
+   end
+})
+
+local GDB = Badges:AddButton({
+   Name = "Get Duck Badge",
+   Callback = function()
+      fireclickdetector(game.Workspace.Arena["default island"]["Rubber Ducky"].ClickDetector)
+   end
+})
+
+local JP = Player:AddSlider({
+   Name = "Jump Power",
+   Min = 50,
+   Max = 1000,
+   Default = 50,
+   Color = Color3.fromRGB(255, 185, 140),
+   Increment = 1,
+   ValueName = "JP",
+   Callback = function(Value)
+      game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+   end
+})
+
+local WS = Player:AddSlider({
+   Name = "Walk Speed",
+   Min = 50,
+   Max = 1000,
+   Default = 50,
+   Color = Color3.fromRGB(255, 185, 140),
+   Increment = 1,
+   ValueName = "WS",
+   Callback = function(Value)
+      game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+   end
+})
