@@ -1,1 +1,92 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Slap Battles | Trux Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "SlapBattles", IntroEnabled = false})
 
+if game.PlaceId == 9431156611 then
+   local Bypass;
+   Bypass = hookmetamethod(game, "__namecall", function(Method, ...) 
+         if getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.Ban then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.AdminGUI then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.WS then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Events.WS2 then
+            return
+         end
+         return Bypass(Method, ...)
+   end)
+end   
+
+if game.PlaceId == 11520107397 or game.PlaceId == 6403373529 or game.PlaceId == 9015014224 then
+   local Bypass;
+   Bypass = hookmetamethod(game, "__namecall", function(Method, ...) 
+         if getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.Ban then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.AdminGUI then
+            return
+         elseif getnamecallmethod() == "FireServer" and Method == game.ReplicatedStorage.WalkSpeedChanged then
+            return
+         end
+         return Bypass(Method, ...)
+   end)
+end
+
+function Notify(Title, Content, Image, Time)
+   OrionLib:MakeNotification({
+      Name = Title or "Error",
+      Content = Content or "Error",
+      Image = Image or "rbxassetid://4483345998",
+      Time = Time or 1
+   })
+end
+
+local Home = Window:MakeTab({
+   Name = "Home",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+local Misc = Window:MakeTab({
+   Name = "Misc",
+   Icon = "rbxassetid://4483345998",
+   PremiumOnly = false
+})
+
+--// Home Buttons
+
+local IY = Home:AddButton({
+   Name = "Infinite Yield",
+   Callback = function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Infinite%20Yield%20but%20with%20secure%20dex'))()
+   end
+})
+
+local RS = Home:AddButton({
+   Name = "Rejoin Server",
+   Callback = function()
+      game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+   end
+})
+
+local DU = Home:AddButton({
+   Name = "Destroy UI",
+   Callback = function()
+      OrionLib:Destroy()
+   end
+})
+
+--// Misc Buttons
+
+local TSF = Home:AddButton({
+   Name = "Testing Server FreeCam",
+   Callback = function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/CrismonPetrasion/Trux_Slap_Battles/main/Trux_FreeCam'))()
+   end
+})
+
+local TSFM = Home:AddButton({
+   Name = "Testing Server FreeCam Mobile",
+   Callback = function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/CrismonPetrasion/Trux_Slap_Battles/main/Trux_FreeCam_Mobile'))()
+   end
+})
