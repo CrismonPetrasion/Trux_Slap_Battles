@@ -72,6 +72,8 @@ local Player = Window:MakeTab({
 
 --// Home Buttons
 
+do
+
 local IY = Home:AddButton({
    Name = "Infinite Yield",
    Callback = function()
@@ -200,3 +202,5 @@ local WS = Player:AddSlider({
       game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
    end
 })
+
+end
